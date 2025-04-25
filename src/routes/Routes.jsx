@@ -11,12 +11,17 @@ export const router = createBrowserRouter([
   {
     path: "/",
     errorElement: <ErrorPage />,
-    HydrateFallback: <Loader />,
+    hydrateFallbackElement: <Loader />,
     Component: MainLayout,
     children: [
       {
         path: "/",
         index: true,
+        hydrateFallbackElement: <Loader />,
+        loader: () =>
+          fetch(
+            "/lawtalk.json"
+          ),
         Component: Home,
       },
       {
@@ -29,6 +34,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/lawyer-details/:name",
+
         Component: LayerDetails,
       },
     ],
